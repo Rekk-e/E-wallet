@@ -63,7 +63,7 @@ func GetWallets(w http.ResponseWriter, r *http.Request) {
 func InitHandlers() {
 	router := mux.NewRouter().StrictSlash(true)
 	router.HandleFunc("/api/send", Send).Methods("POST")
-	router.HandleFunc("/api/transactions", GetLast).Methods("POST")
+	router.HandleFunc("/api/transactions", GetLast).Methods("GET")
 	router.HandleFunc("/api/wallet/{address}/balance", GetBalance).Methods("GET")
 	router.HandleFunc("/api/wallets", GetWallets).Methods("GET")
 	log.Fatal(http.ListenAndServe(":8080", router))
