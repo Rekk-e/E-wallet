@@ -1,0 +1,35 @@
+version: '3.4'
+
+services:
+  web:
+    build: ./
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./:/app
+    networks:
+      - service_network
+
+  database:
+    container_name: database
+    image: postgres:alpine
+    #ports:
+    #  - "5432:5432"
+    volumes:
+      - ./database:/var/lib/postgresql/data
+    restart: always
+    environment:
+      - POSTGRES_DB=$POSTGRES_DB
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    env_file:
+      - .env
+    networks:
+      - service_network
+
+networks:
+  service_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.57.43/24
