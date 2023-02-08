@@ -30,7 +30,7 @@ GET /api/transactions
 Body
 ```yaml
 {
-  "count" integer
+  "count": integer
 }
 ```
 
